@@ -25,3 +25,7 @@ wandb/*
 
 # models / training
 experiments/*
+
+# twcc
+twcc_logs/*
+*.out
