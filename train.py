@@ -13,6 +13,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--cfg', default='config/default.yaml', help='config file path')
     parser.add_argument('--auth', help='wandb auth api key')
+    parser.add_argument('--proj_name', default='TarDAL-v1', help='wandb project name')
+    parser.add_argument('--run_name', default='', required=True, help='wandb run name')
     args = parser.parse_args()
 
     # init config
@@ -44,5 +46,5 @@ if __name__ == '__main__':
             raise ValueError(f'unknown strategy: {config.strategy}')
 
     # create script instance
-    train = train_p(config, wandb_key=args.auth)
+    train = train_p(config, wandb_key=args.auth, proj_name=args.proj_name, run_name=args.run_name)
     train.run()

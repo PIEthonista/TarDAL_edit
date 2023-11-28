@@ -20,7 +20,7 @@ from tools.dict_to_device import dict_to_device
 
 
 class TrainF:
-    def __init__(self, config: str | Path | ConfigDict, wandb_key: str):
+    def __init__(self, config: str | Path | ConfigDict, wandb_key: str, proj_name: str, run_name: str):
         # init logger
         log_f = '%(asctime)s | %(filename)s[line:%(lineno)d] | %(levelname)s | %(message)s'
         logging.basicConfig(level='INFO', format=log_f)
@@ -40,7 +40,7 @@ class TrainF:
 
         # wandb run
         wandb.login(key=wandb_key)  # wandb api key
-        runs = wandb.init(project='TarDAL-v1', config=config, mode=config.debug.wandb_mode)
+        runs = wandb.init(project=proj_name, name=run_name, config=config, mode=config.debug.wandb_mode)
         self.runs = runs
 
         # init save folder
@@ -176,6 +176,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--cfg', default='config/default.yaml', help='config file path')
     parser.add_argument('--auth', help='wandb auth api key')
+    parser.add_argument('--proj_name', default='TarDAL-v1', help='wandb project name')
+    parser.add_argument('--run_name', default='', required=True, help='wandb run name')
     args = parser.parse_args()
-    train = TrainF(args.cfg, args.auth)
+    train = TrainF(args.cfg, args.auth, args.proj_name, args.run_name)
     train.run()
