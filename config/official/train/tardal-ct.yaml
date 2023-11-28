@@ -1,6 +1,7 @@
 # base settings
 device   : cuda # device used for training and evaluation (cpu, cuda, cuda0, cuda1, ...)
-save_dir : 'cache' # folder used for saving the model, logs results
+# save_dir : 'cache' # folder used for saving the model, logs results
+save_dir : 'experiments/tardal_ct'
 
 # debug mode settings
 debug    :

@@ -1,3 +1,25 @@
+## TODO (Additional Setup for proper functionality):
+1. setup env as stated
+2. pip install gdown
+3. cd ...TarDAL_edit/data
+3. gdown 1C8kkYkj1Xls6UtvJ4h6UajiPcvaQ7eeI
+4. gdown 1pjdhjVTpOsj2qMBVIRpLOLA7UWIuHt0P
+5. gdown 1X6dQHn_vJ41TZQtZCl-GLO_gcTrbj-Uq
+6. gdown 1WhXWQ7nnZViMUKDoyo_e4CXuNk7Jcspf
+7. make dirs data/m3fd, data/tno, data/roadscene
+8. cd data/m3fd, unzip M3FD_Detection.zip
+9. cd data/tno, unzip tno.zip
+10. cd data/roadscene, unzip roadscene.zip
+11. rename data/M3FD/Ir to data/M3FD/ir
+12. rename data/M3FD/Vis to data/M3FD/vi
+13. make dirs data/M3FD/meta, data/M3FD/labels
+14. python generate_m3fd_meta.py
+15. python generate_yolo_labels_from_xml.py
+16. make dirs ...TarDAL_edit/experiments
+
+</br>
+
+
 # TarDAL 
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JinyuanLiu-CV/TarDAL/blob/main/tutorial.ipynb)
@@ -67,7 +89,7 @@ The preview of our dataset is as follows.
 - [Google Drive](https://drive.google.com/drive/folders/1H-oO7bgRuVFYDcMGvxstT1nmy0WF_Y_6?usp=sharing)
 - [Baidu Yun](https://pan.baidu.com/s/1GoJrrl_mn2HNQVDSUdPCrw?pwd=M3FD)
 
-### File structure
+### File structure (Don't refer this, refer the below on Data Preparation)
 
 ```
   M3FD
@@ -179,7 +201,7 @@ As we mentioned in our paper, we provide three pre-trained models.
 | TarDAL-TT | Optimized for object detection.                                 |
 | TarDAL-CT | Optimal solution for joint human vision and detection accuracy. |
 
-You can find their corresponding configuration file path in [configs](config/official/infer).
+You can find their corresponding configuration file path in [config](config/official/infer).
 
 Some settings you should pay attention to:
 
@@ -188,7 +210,7 @@ Some settings you should pay attention to:
     * `dataset`: name & root
     * `inference`: each item in inference
 * infer.py
-    * `--cfg`: config file path, such as `configs/official/tardal-dt.yaml`
+    * `--cfg`: config file path, such as `config/official/tardal-dt.yaml`
     * `--save_dir`: result save folder
 
 Under normal circumstances, you don't need to manually download the model parameters, our program will do it for you.
@@ -196,13 +218,13 @@ Under normal circumstances, you don't need to manually download the model parame
 ```shell
 # TarDAL-DT
 # use official tardal-dt infer config and save images to runs/tardal-dt
-python infer.py --cfg configs/official/tardal-dt.yaml --save_dir runs/tardal-dt
+python infer.py --cfg config/official/infer/tardal-dt.yaml --save_dir runs/tardal-dt
 # TarDAL-TT
 # use official tardal-tt infer config and save images to runs/tardal-tt
-python infer.py --cfg configs/official/tardal-tt.yaml --save_dir runs/tardal-tt
+python infer.py --cfg config/official/infer/tardal-tt.yaml --save_dir runs/tardal-tt
 # TarDAL-CT
 # use official tardal-ct infer config and save images to runs/tardal-ct
-python infer.py --cfg configs/official/tardal-ct.yaml --save_dir runs/tardal-ct
+python infer.py --cfg config/official/infer/tardal-ct.yaml --save_dir runs/tardal-ct
 ```
 
 #### Train
@@ -216,11 +238,11 @@ Unlike previous code versions, you don't need to preprocess the data, we will au
 
 ```shell
 # TarDAL-DT
-python train.py --cfg configs/official/tardal-dt.yaml --auth $YOUR_WANDB_KEY
+python train.py --cfg config/official/train/tardal-dt.yaml --auth $YOUR_WANDB_KEY
 # TarDAL-TT
-python train.py --cfg configs/official/tardal-tt.yaml --auth $YOUR_WANDB_KEY
+python train.py --cfg config/official/train/tardal-tt.yaml --auth $YOUR_WANDB_KEY
 # TarDAL-CT
-python train.py --cfg configs/official/tardal-ct.yaml --auth $YOUR_WANDB_KEY
+python train.py --cfg config/official/train/tardal-ct.yaml --auth $YOUR_WANDB_KEY
 ```
 
 If you want to base your approach on ours and extend it to a production environment, here are some additional suggestions for you.
@@ -246,3 +268,6 @@ If this work has been helpful to you, please feel free to cite our paper!
   year={2022}
 }
 ```
+
+
+
