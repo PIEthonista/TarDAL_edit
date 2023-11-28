@@ -12,7 +12,7 @@ debug    :
 #   backward method: fuse (direct training DT)
 #   backward method: detect (task-oriented training TT)
 #   backward method: fuse & detect (cooperative training CT)
-strategy : fuse
+strategy : fuse & detect
 
 # fuse network settings: core of infrared and visible fusion
 fuse     :
