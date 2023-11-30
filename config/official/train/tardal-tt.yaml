@@ -9,7 +9,7 @@ debug    :
   wandb_mode: 'online' # wandb connection mode
   fast_run  : false # use a small subset of the dataset for debugging code
 
-# framework training strategy:
+# framework training strategy (what losses to take into account during backprop):
 #   backward method: fuse (direct training DT)
 #   backward method: detect (task-oriented training TT)
 #   backward method: fuse & detect (cooperative training CT)
