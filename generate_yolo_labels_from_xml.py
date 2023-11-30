@@ -14,6 +14,7 @@ def convert_coordinates(size, box):
     w = w * dw
     y = y * dh
     h = h * dh
+    # x, y, w, h = box[0], box[1], box[2], box[3]
     return x, y, w, h
 
 def parse_xml(xml_file, class_mapping):

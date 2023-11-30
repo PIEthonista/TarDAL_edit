@@ -13,9 +13,10 @@
 11. rename data/M3FD/Ir to data/M3FD/ir
 12. rename data/M3FD/Vis to data/M3FD/vi
 13. make dirs data/M3FD/meta, data/M3FD/labels
-14. python generate_m3fd_meta.py
-15. python generate_yolo_labels_from_xml.py
-16. make dirs ...TarDAL_edit/experiments
+14. python generate_m3fd_meta.py (this split the data into 60 20 20 train test val for training)
+15. manually copy the contents of data/m3fd/meta/val.txt, create pred.txt and paste in the contents
+16. python generate_yolo_labels_from_xml.py
+17. make dirs ...TarDAL_edit/experiments
 
 </br>
 

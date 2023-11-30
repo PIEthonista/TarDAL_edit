@@ -19,13 +19,15 @@ strategy : fuse & detect
 fuse     :
   dim       : 32 # features base dimensions for generator and discriminator
   depth     : 3 # depth of dense architecture
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
+  # pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
+  pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
 
 # detect network settings: available if framework in joint mode (detect, fuse + detect)
 detect   :
   model     : yolov5s # yolo model (yolov5 n,s,m,l,x)
   channels  : 3 # input channels (3: rgb or 1: grayscale)
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
+  # pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
+  pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
 
 # saliency network settings: generating mask for training tardal
 saliency :
@@ -67,7 +69,7 @@ inference:
   num_workers: 8 # number of workers used in data loading
   use_eval   : ~ # use eval mode in inference mode, default true, false for v0 weights.
   grayscale  : false # ignore dataset settings, save as grayscale image
-  save_txt   : false # save label file
+  save_txt   : true # save label file
 
 # loss settings:
 loss     :
