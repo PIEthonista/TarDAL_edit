@@ -297,9 +297,10 @@ class TrainFD:
                 # mark best
                 if map_all > best_map:
                     best_map = map_all
+                    best_map50 = map50
                     Path(self.save_dir / 'meta.txt').write_text(f'best_map: {best_map:.4f} | epoch: {epoch}')
                     ckpt = self.fuse.save_ckpt() | self.detect.save_ckpt()
-                    torch.save(ckpt, self.save_dir / f'{str(epoch).zfill(5)}-{best_map:.4f}.pth')
+                    torch.save(ckpt, self.save_dir / f'{str(epoch).zfill(5)}-map-{best_map:.4f}-map50-{best_map50:.4f}.pth')
 
             # update wandb
             self.runs.log(log_dict)
