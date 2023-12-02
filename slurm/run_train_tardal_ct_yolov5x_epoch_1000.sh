@@ -9,5 +9,5 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=gohyixian456@gmail.com
 
-# 545748
+# 546471
 python train.py --cfg config/official/train/tardal-ct-yolov5x-epoch-1000.yaml --auth 6b305360cd440b1f7432d6f1ba4d81e0c0a60536 --run_name tardal_ct_20231130_yolov5x_epoch_1000

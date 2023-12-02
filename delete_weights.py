@@ -26,7 +26,7 @@ def delete_files_except(folder_path, preserve_files):
         print(f"An error occurred: {str(e)}")
 
 # Example usage
-folder_path = "/work/u5832291/yixian/TarDAL_edit/experiments/tardal_tt/20231129_default"
-preserve_files = ["00288-0.1566.pth", "00300.pth", "meta.txt"]
+folder_path = "/work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231130_default_without_pretrained_fusionnet"
+preserve_files = ["00274-0.1594.pth", "00300.pth", "meta.txt"]
 
 delete_files_except(folder_path, preserve_files)
