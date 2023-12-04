@@ -13,6 +13,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--cfg', default='config/default.yaml', help='config file path')
     parser.add_argument('--save_dir', default='runs/tmp', help='fusion result save folder')
+    parser.add_argument('--eval', action='store_true', help='add flag for eval mode (with statistics)')
     args = parser.parse_args()
 
     # init config
@@ -38,7 +39,10 @@ if __name__ == '__main__':
                 logging.warning('no pretrained weights specified, use official pretrained weights')
                 config.fuse.pretrained = 'https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-dt.pth'
         case 'fuse & detect':
-            infer_p = getattr(scripts, 'InferFD')
+            if args.eval:
+                infer_p = getattr(scripts, 'EvalFD')
+            else:
+                infer_p = getattr(scripts, 'InferFD')
             # check pretrained weights
             if config.fuse.pretrained is None:
                 logging.warning('no pretrained weights specified, use official pretrained weights')

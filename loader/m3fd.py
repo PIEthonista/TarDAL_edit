@@ -84,6 +84,8 @@ class M3FD(Dataset):
         # load infrared and visible
         ir = gray_read(self.root / 'ir' / name)
         vi, cbcr = ycbcr_read(self.root / 'vi' / name)
+        
+        shape = ir.shape[1:]
 
         # load mask
         mask = gray_read(self.root / 'mask' / name)
@@ -102,18 +104,19 @@ class M3FD(Dataset):
         # transform (resize)
         resize_fn = Resize(size=self.config.train.image_size)
         t = resize_fn(t)
+        
+        if self.mode == 'train':
+            # transform (flip up-down)
+            if random.random() < self.config.dataset.detect.flip_ud:
+                t = vflip(t)
+                if len(labels):
+                    labels[:, 2] = 1 - labels[:, 2]
 
-        # transform (flip up-down)
-        if random.random() < self.config.dataset.detect.flip_ud:
-            t = vflip(t)
-            if len(labels):
-                labels[:, 2] = 1 - labels[:, 2]
-
-        # transform (flip left-right)
-        if random.random() < self.config.dataset.detect.flip_lr:
-            t = hflip(t)
-            if len(labels):
-                labels[:, 1] = 1 - labels[:, 1]
+            # transform (flip left-right)
+            if random.random() < self.config.dataset.detect.flip_lr:
+                t = hflip(t)
+                if len(labels):
+                    labels[:, 1] = 1 - labels[:, 1]
 
         # transform labels (cls, x1, y1, x2, y2) -> (0, cls, ...)
         labels_o = torch.zeros((len(labels), 6))
@@ -128,7 +131,8 @@ class M3FD(Dataset):
             'name': name,
             'ir': ir, 'vi': vi,
             'ir_w': ir_w, 'vi_w': vi_w, 'mask': mask, 'cbcr': cbcr,
-            'labels': labels_o
+            'labels': labels_o,
+            'shape': shape
         }
 
         # return as expected
