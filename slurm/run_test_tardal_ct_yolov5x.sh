@@ -9,5 +9,5 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=gohyixian456@gmail.com
 
-# 547028
+# 547133
 python infer.py --cfg config/official/infer/tardal-ct-yolov5x.yaml --save_dir experiments/tardal_ct_yolov5x/20231130/infer --eval

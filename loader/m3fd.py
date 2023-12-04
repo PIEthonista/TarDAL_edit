@@ -175,7 +175,9 @@ class M3FD(Dataset):
         for img_t, img_p, img_s, pred_i in zip(fus, names, shape, pred):
             # reshape target
             cur_s = img_t.shape[1:]
-            scale_x, scale_y = cur_s[1] / img_s[1], cur_s[0] / img_s[0]
+            # scale_x, scale_y = cur_s[1] / img_s[1], cur_s[0] / img_s[0]
+            scale_x, scale_y = img_s[1] / cur_s[1], img_s[0] / cur_s[0]
+            
             pred_i[:, :4] *= Tensor([scale_x, scale_y, scale_x, scale_y]).to(pred_i.device)
             # reshape image
             img_t = resize(img_t, img_s)
