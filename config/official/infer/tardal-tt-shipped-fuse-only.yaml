@@ -1,7 +1,7 @@
 # base settings
 device   : cuda # device used for training and evaluation (cpu, cuda, cuda0, cuda1, ...)
 # save_dir : 'cache' # folder used for saving the model, logs results
-save_dir : 'experiments/tardal_ct'
+save_dir : 'experiments/tardal_tt'
 
 # debug mode settings
 debug    :
@@ -13,25 +13,14 @@ debug    :
 #   backward method: fuse (direct training DT)
 #   backward method: detect (task-oriented training TT)
 #   backward method: fuse & detect (cooperative training CT)
-# strategy : fuse & detect
-strategy : fuse & detect
+strategy : fuse 
 
 # fuse network settings: core of infrared and visible fusion
 fuse     :
   dim       : 32 # features base dimensions for generator and discriminator
   depth     : 3 # depth of dense architecture
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
-  # # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
-  # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231130_default_without_pretrained_fusionnet/00274-0.1594.pth  # best_map: 0.1594 | epoch: 274
-
-# detect network settings: available if framework in joint mode (detect, fuse + detect)
-# detect network settings: available if framework in joint mode (detect, fuse + detect)
-detect   :
-  model     : yolov5s # yolo model (yolov5 n,s,m,l,x)
-  channels  : 3 # input channels (3: rgb or 1: grayscale)
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
-  # # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
-  # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231130_default_without_pretrained_fusionnet/00274-0.1594.pth  # best_map: 0.1594 | epoch: 274
+  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-tt.pth # ~: disable, path or url: load with pretrained parameters
+  # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_tt/20231129_default/00288-0.1566.pth # best_map: 0.1566 | epoch: 288
 
 # saliency network settings: generating mask for training tardal
 saliency :
@@ -62,19 +51,19 @@ dataset  :
 train    :
   image_size   : [ 224, 224 ] # training image size in (h, w)
   batch_size   : 32 # batch size used to train
-  num_workers  : 8 # number of workers used in data loading
+  num_workers  : 12 # number of workers used in data loading
   epochs       : 1000 # number of epochs to train
-  eval_interval: 1 # evaluation interval during training
+  eval_interval: 5 # evaluation interval during training
   save_interval: 5 # save interval during training
 
 # inference settings:
 inference:
   batch_size : 8 # batch size used to train
-  num_workers: 8 # number of workers used in data loading
-  use_eval   : ~ # use eval mode in inference mode, default true, false for v0 weights.
+  num_workers: 12 # number of workers used in data loading
+  use_eval   : true # use eval mode in inference mode, default true, false for v0 weights.
   grayscale  : false # ignore dataset settings, save as grayscale image
   save_txt   : true # save label file
-
+  
 # loss settings:
 loss     :
   # fuse loss: src(l1+ssim/ms-ssim) + adv(target+detail) + det
@@ -82,8 +71,9 @@ loss     :
     src_fn: v1 # v0: 1*ssim + 20*l1 | v1: ms-ssim
     src   : 0.8  # src loss gain (1 during v0)
     adv   : 0.2 # adv loss gain (0.1 during v0)
-    t_adv : 0 # target loss gain
-    d_adv : 0 # detail loss gain
+    t_adv : 0.5 # target loss gain
+    d_adv : 0.5 # detail loss gain
+    det   : 1.0 # det loss gain (available only for detect or fuse+detect mode)
     d_mask: false # use mask for detail discriminator (v0: true)
     d_warm: 10 # discriminator warmup epochs
   # detect loss: box + cls + obj

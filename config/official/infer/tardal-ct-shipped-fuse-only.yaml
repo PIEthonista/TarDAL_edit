@@ -14,21 +14,12 @@ debug    :
 #   backward method: detect (task-oriented training TT)
 #   backward method: fuse & detect (cooperative training CT)
 # strategy : fuse & detect
-strategy : fuse & detect
+strategy : fuse
 
 # fuse network settings: core of infrared and visible fusion
 fuse     :
   dim       : 32 # features base dimensions for generator and discriminator
   depth     : 3 # depth of dense architecture
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
-  # # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
-  # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231130_default_without_pretrained_fusionnet/00274-0.1594.pth  # best_map: 0.1594 | epoch: 274
-
-# detect network settings: available if framework in joint mode (detect, fuse + detect)
-# detect network settings: available if framework in joint mode (detect, fuse + detect)
-detect   :
-  model     : yolov5s # yolo model (yolov5 n,s,m,l,x)
-  channels  : 3 # input channels (3: rgb or 1: grayscale)
   pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-ct.pth # ~: disable, path or url: load with pretrained parameters
   # # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231129_default/00254-0.1427.pth  # best_map: 0.1427 | epoch: 254
   # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_ct/20231130_default_without_pretrained_fusionnet/00274-0.1594.pth  # best_map: 0.1594 | epoch: 274

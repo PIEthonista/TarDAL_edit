@@ -9,5 +9,5 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=gohyixian456@gmail.com
 
-# 547234
-python infer.py --cfg config/official/infer/tardal-ct.yaml --save_dir experiments/tardal_ct/shipped_pretrained/infer
+# 549526
+python infer.py --cfg config/official/infer/tardal-ct-shipped-fuse-only.yaml --save_dir experiments/tardal_ct/shipped_pretrained_fuse_only/infer
