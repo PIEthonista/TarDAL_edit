@@ -10,4 +10,6 @@
 #SBATCH --mail-user=gohyixian456@gmail.com
 
 # 549527
-python infer.py --cfg config/official/infer/tardal-dt-shipped-fuse-only.yaml --save_dir experiments/tardal_dt/shipped_pretrained_fuse_only/infer
+# python infer.py --cfg config/official/infer/tardal-dt-shipped-fuse-only.yaml --save_dir experiments/tardal_dt/shipped_pretrained_fuse_only/infer
+
+python infer.py --cfg config/official/infer/tardal-dt-shipped-fuse-only.yaml --save_dir experiments/tardal_dt/20231129_default/infer_all

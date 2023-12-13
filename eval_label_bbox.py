@@ -94,6 +94,14 @@ if __name__ == "__main__":
     
     confidence_threshold = 0.6 # as set in line 180, loader/m3fd.py  ->  pred_x = list(filter(lambda x: x[4] > 0.6, pred_i))
     
+    # image_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct/20231130_default_without_pretrained_fusionnet/infer/images'
+    # bbox_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct/20231130_default_without_pretrained_fusionnet/infer/labels'
+    # output_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct/20231130_default_without_pretrained_fusionnet/infer/images_labelled'
+    
+    # image_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct_yolov5x/20231130/infer/images'
+    # bbox_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct_yolov5x/20231130/infer/labels'
+    # output_folder_path = '/Users/gohyixian/Desktop/twcc_results/TarDAL/tardal_ct_yolov5x/20231130/infer/images_labelled'
+    
     # # for all ground truth labelling
     # infer_folder = 'data/m3fd'
     # image_folder_path = os.path.join(infer_folder, 'ir')

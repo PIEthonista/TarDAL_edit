@@ -19,7 +19,8 @@ strategy : fuse
 fuse     :
   dim       : 32 # features base dimensions for generator and discriminator
   depth     : 3 # depth of dense architecture
-  pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-dt.pth # ~: disable, path or url: load with pretrained parameters
+  pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_dt/20231129_default/01000.pth # self trained - attempt to reproduce results
+  # pretrained: https://github.com/JinyuanLiu-CV/TarDAL/releases/download/v1.0.0/tardal-dt.pth # ~: disable, path or url: load with pretrained parameters
   # pretrained: /work/u5832291/yixian/TarDAL_edit/experiments/tardal_dt/20231129_default/01000.pth # no metric info / meta.txt, taking epoch 1000
 
 # saliency network settings: generating mask for training tardal
